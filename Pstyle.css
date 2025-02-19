@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+img {
+    max-height: 100%;
+    display: block;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: left center;
+    size: 70px;
+    box-sizing: border-box;
+    visibility: hidden;
+    background-color: beige;
+}
+
+nav {
+    background-color: beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+li:hover, li:focus {
+    background-color: hsl(181, 70%, 43%);
+}
+
+
+#display-area {
+    background-color: beige;
+    margin-top: 20px;
+    padding: 10px;
+    border: solid 2px black;
+    text-align: center;
