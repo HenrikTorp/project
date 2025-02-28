@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch the Ball Game</title>
+    <title>Square the Number Game</title>
     <link rel="stylesheet" href="game.css">
 </head>
 <body>
-    <h1>Catch the Ball Game</h1>
+    <h1>Square the Number Game</h1>
     <div id="game-container">
-        <div id="paddle"></div>
-        <div id="ball"></div>
+        <p id="question"></p>
+        <input type="number" id="answer" placeholder="Your answer" onkeydown="handleKeyDown(event)">
+        <button onclick="checkAnswer()">Submit</button>
+        <button onclick="resetScore()">Reset Score</button>
     </div>
     <div id="score">Score: 0</div>
 

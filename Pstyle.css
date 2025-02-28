@@ -47,3 +47,5 @@ li:hover, li:focus {
     padding: 10px;
     border: solid 2px black;
     text-align: center;
+    border-radius: 10px;
+}

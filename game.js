@@ -1,52 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const gameContainer = document.getElementById('game-container');
-    const paddle = document.getElementById('paddle');
-    const ball = document.getElementById('ball');
-    const scoreDisplay = document.getElementById('score');
-    let score = 0;
-    let ballSpeed = 2;
-    let ballDirection = 1;
+let score = 0;
+let currentNumber;
 
-    // Move paddle with mouse
-    gameContainer.addEventListener('mousemove', (e) => {
-        const rect = gameContainer.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        paddle.style.left = `${mouseX - paddle.offsetWidth / 2}px`;
-    });
+function generateQuestion() {
+    currentNumber = Math.floor(Math.random() * 90) + 10; // Generate a double-digit number
+    document.getElementById('question').innerText = `What is ${currentNumber} squared?`;
+}
 
-    // Ball falling logic
-    function moveBall() {
-        const ballRect = ball.getBoundingClientRect();
-        const paddleRect = paddle.getBoundingClientRect();
-        const gameRect = gameContainer.getBoundingClientRect();
+function checkAnswer() {
+    const userAnswer = parseInt(document.getElementById('answer').value);
+    const correctAnswer = currentNumber * currentNumber;
 
-        // Check if ball hits the paddle
-        if (
-            ballRect.bottom >= paddleRect.top &&
-            ballRect.left >= paddleRect.left &&
-            ballRect.right <= paddleRect.right
-        ) {
-            ballDirection = -1;
-            score++;
-            scoreDisplay.textContent = `Score: ${score}`;
-            ballSpeed += 0.5; // Increase speed
-        }
-
-        // Check if ball hits the top
-        if (ballRect.top <= gameRect.top) {
-            ballDirection = 1;
-        }
-
-        // Check if ball hits the bottom (game over)
-        if (ballRect.bottom >= gameRect.bottom) {
-            alert('Game Over! Your score is ' + score);
-            document.location.reload();
-        }
-
-        // Move the ball
-        ball.style.top = `${ball.offsetTop + ballSpeed * ballDirection}px`;
-        requestAnimationFrame(moveBall);
+    if (userAnswer === correctAnswer) {
+        score++;
+        alert('Correct!');
+    } else {
+        score--;
+        alert(`Wrong! The correct answer was ${correctAnswer}.`);
     }
 
-    moveBall();
-});
+    document.getElementById('score').innerText = `Score: ${score}`;
+    document.getElementById('answer').value = '';
+    generateQuestion();
+}
+
+function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+        checkAnswer();
+    }
+}
+
+function resetScore() {
+    score = 0;
+    document.getElementById('score').innerText = `Score: ${score}`;
+}
+
+// Initialize the first question
+generateQuestion();
